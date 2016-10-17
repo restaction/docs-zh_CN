@@ -1,0 +1,4 @@
+site_name: RestAction
+pages:
+  - 首页: index.md
+repo_url: 'https://github.com/guyskk/flask-restaction'
