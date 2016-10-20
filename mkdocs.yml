@@ -4,4 +4,5 @@ pages:
   - 起步: quickstart.md
   - resjs: resjs.md
   - Schema语法: schema.md
+  - API: api.autodoc
 repo_url: 'https://github.com/guyskk/flask-restaction'

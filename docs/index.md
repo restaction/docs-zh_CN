@@ -55,14 +55,17 @@ flask-restaction 相对于 flask-restful 有什么优势，或是什么特性?
 
     Request Parsing 很繁琐，不能很好的重用代码。
 
+
 - 清晰的URL规则
 
     restaction 的 URL 规则清晰，并始终保持一致，减少了编码和阅读API文档的负担。
+
 
 - 身份验证及权限控制
 
     restaction 提供一个灵活的权限系统，身份验证基于 json web token，
     权限验证是通过json配置文件，而不是散布在代码中的装饰器。
+
 
 - 自动生成文档和res.js
 
