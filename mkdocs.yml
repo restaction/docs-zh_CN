@@ -5,4 +5,7 @@ pages:
   - resjs: resjs.md
   - Schema语法: schema.md
   - API: api.autodoc
+theme: yeti
+extra_css:
+    - css/extra.css
 repo_url: 'https://github.com/guyskk/flask-restaction'

@@ -1,1 +1,2 @@
+mkdocs-bootswatch
 git+https://github.com/restaction/mkdocs-autodoc.git
