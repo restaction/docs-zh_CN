@@ -65,13 +65,11 @@
 
 #### 两个概念
 
-**resource**
+Resource
+:   资源，比如这里的 Hello 类，表示一类资源。
 
-    资源，比如这里的 Hello 类，表示一类资源。
-
-**action**
-
-    操作，例如 get, post, delete, get_list, post_login。
+Action
+:   操作，例如 get, post, delete, get_list, post_login。
     只要是 HTTP 方法或 HTTP 方法加下划线 _ 开头就行。
 
 
@@ -83,25 +81,22 @@
 
 在Action的文档字符串中用 `$input`, `$output` 描述输入输出Schema, 用 `$error` 描述可能返回的错误。
 
-**$input**
-
-    输入格式，如果没有$input，则不校验输入，以无参数的形式调用Action。
+$input
+:   输入格式，如果没有$input，则不校验输入，以无参数的形式调用Action。
     实际数据来源取决于HTTP方法，GET和DELETE请求，取自url参数，
     POST,PUT和PATCH请求，取自请求体，Content-Type为application/json。
 
-**$output**
+$output
+:   输出格式，如果没有$output，则不校验输出。
 
-    输出格式，如果没有$output，则不校验输出。
-
-**$error**
-
-    描述可能返回的错误，仅作为API文档，例如:
+$error
+:   描述可能返回的错误，仅作为API文档，例如:
 
         $error:
             400.InvalidData: 输入参数错误
             403.PermissionDeny: 权限不足
 
-    格式为: status.Error: message
+    格式为: `status.Error: message`
 
 
 请求参数校验失败会返回:
@@ -137,8 +132,11 @@ Schema为[YAML](https://zh.wikipedia.org/wiki/YAML)格式的字符串，语法�
 
 endpoint (url_for 的参数) 是 `resource@action_name`
 
-**resource**: Resource类名称的小写
-**action_name**: Action的后半部分(下划线分隔)
+resource
+:   Resource类名称的小写
+
+action_name
+:   Action的后半部分(下划线分隔)
 
 格式:
 
@@ -244,36 +242,11 @@ user.py 登录接口
 
 ### 示意图
 
-              +--------+               +--------------+        +--------------+         +-------------+
-              |        |               |              |  None  |              |  guest  |             |
-    Deny      |  User  +---------------> decode_token +-------->   get_role   +---------X  hello.get  |
-              |        |               |              |        |              |         |             |
-              +--------+               +--------------+        +--------------+         +-------------+
-
-
-              +--------+               +--------------+        +--------------+         +-------------+
-              |        |               |              |  None  |              |  guest  |             |
-              |  User  +---------------> decode_token +-------->   get_role   +--------->  user.post  |
-              |        |               |              |        |              |         |             |
-    Login     +---+----+               +--------------+        +--------------+         +------+------+
-                  ^                                                                            |
-                  |                                +--------------+                            |
-                  |          Authorization         |              |          g.token           |
-                  +--------------------------------+ encode_token <----------------------------+
-                                                   |              |
-                                                   +--------------+
-
-
-              +--------+               +--------------+        +--------------+         +-------------+
-              |        | Authorization |              |  token |              |  admin  |             |
-     OK       |  User  +---------------> decode_token +-------->   get_role   +--------->  hello.get  |
-              |        |               |              |        |              |         |             |
-              +--------+               +--------------+        +--------------+         +-------------+
-
+![diagram](img/auth.png)
 
 ### 分步说明
 
-#### 在 metafile 中设定角色和权限
+#### 1. 在 metafile 中设定角色和权限
 
 metafile是一个描述API信息的文件，通常放在应用的根目录下，文件名 meta.json。
 
@@ -290,9 +263,9 @@ metafile是一个描述API信息的文件，通常放在应用的根目录下，
 
 请求到来时，根据 Role, Resource, Action 可以快速确定是否许可此次请求。
 
-**提示**: 
+!!! note "提示"
 
-    flask的Development Server不能检测到python代码文件之外变动，所以修改metafile的内容之后需要手动重启才能生效。
+    Flask的Development Server不能检测到python代码文件之外变动，所以修改metafile的内容之后需要手动重启才能生效。
 
 
 #### 注册 get_role 函数
@@ -306,11 +279,11 @@ token 一般会储存用户ID和过期时间，用户在发送请求时需要将
 
 TokenAuth使用 [json web token](https://github.com/jpadilla/pyjwt) 作为身份验证工具。
 
-**提示**:
+!!! note "提示"
 
-     token 会用密钥(app.secret_key)对 token 进行签名，无法篡改。
-     生成 token 前需要先设置 app.secret_key，或通过 flask 配置。
-     token 是未加密的，不要把敏感信息保存在里面。
+     token 会用密钥(app.secret_key)对 token 进行签名，无法篡改。  
+     生成 token 前需要先设置 app.secret_key，或通过 flask 配置。  
+     token 是未加密的，不要把敏感信息保存在里面。  
 
 
 身份/权限验证失败会返回:
