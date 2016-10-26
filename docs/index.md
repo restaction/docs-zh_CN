@@ -14,13 +14,6 @@
 
     pip install flask-restaction
 
-
-## Examples
-
-项目主页的examples目录:
-https://github.com/guyskk/flask-restaction/examples
-
-
 ## 对比其它框架
 
 ### flask-restful

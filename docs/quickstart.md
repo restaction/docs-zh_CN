@@ -117,7 +117,7 @@ $error
 
 Schema为[YAML](https://zh.wikipedia.org/wiki/YAML)格式的字符串，语法见[Schema语法](schema.md)。
 
-#### 自定义校验器
+### 自定义校验器
 
 在Validr的文档中讲述了自定义校验器的用法。
 
@@ -126,9 +126,32 @@ Schema为[YAML](https://zh.wikipedia.org/wiki/YAML)格式的字符串，语法�
 更多内容请移步[Validr](https://github.com/guyskk/validr)。
 
 
+## 添加资源
+
+使用 `Api.add_resource` 方法添加资源，传给 `add_resource` 的参数都会原封不动的传给Resource的 `__init__` 方法。
+
+路由路径是和Resource名称相同的，如果需要指定不同的路径，可以通过创建一个新Resource实现:
+
+    api.add_resource(type('NewName', (MyResource,), {}))
+
+
+一个Resource可能要依赖其他对象，或者是依赖于网络上的另一个API。
+使用依赖注入的方式为Resource提供依赖，而不是使用全局变量。
+
+例如，User依赖于其他对象:
+
+    class User:
+
+        def __init__(self, dependecy):
+            self.dependecy = dependecy
+
+    dependecy = Xxx()
+    api.add_resource(User, dependecy=dependecy)
+
+
 ## 构建 URL
 
-可以使用 flask 中的 url_for() 函数构建指定 action 的 URL。
+可以使用 flask 中的 `url_for()` 函数构建指定 action 的 URL。
 
 endpoint (url_for 的参数) 是 `resource@action_name`
 
@@ -340,29 +363,6 @@ TokenAuth使用 [json web token](https://github.com/jpadilla/pyjwt) 作为身份
             return rv, status, headers
 
 
-## 添加资源
-
-使用 `Api.add_resource` 方法添加资源，传给 `add_resource` 的参数都会原封不动的传给Resource的 `__init__` 方法。
-
-路由路径是和Resource名称相同的，如果需要指定不同的路径，可以通过创建一个新Resource实现:
-
-    api.add_resource(type('NewName', (MyResource,), {}))
-
-
-一个Resource可能要依赖其他对象，或者是依赖于网络上的另一个API。
-使用依赖注入的方式为Resource提供依赖，而不是使用全局变量。
-
-例如，User依赖于其他对象:
-
-    class User:
-
-        def __init__(self, dependecy):
-            self.dependecy = dependecy
-
-    dependecy = Xxx()
-    api.add_resource(User, dependecy=dependecy)
-
-
 ## API文档
 
 ![文档截图](img/docs.png)
@@ -456,7 +456,7 @@ Api提供before_request, after_request, error_handler这3个装饰器用来注�
 
 ## 使用 res.py
 
-res.py 的用法类似于 res.js，网络请求用的是requests库。
+res.py 的用法类似于 res.js，网络请求用的是[Requests](https://github.com/kennethreitz/requests)库。
 
     >>> from flask_restaction import Res
     >>> help(Res)

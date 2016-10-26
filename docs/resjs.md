@@ -4,7 +4,8 @@ res.js是对AJAX的封装，用res.js调用API非常简单，回调是Promise风
 
 ## 生成res.js
 
-可以用flask-restaction提供的命令行工具或者 https://www.npmjs.com/package/resjs
+可以用flask-restaction提供的命令行工具或者
+[https://www.npmjs.com/package/resjs](https://www.npmjs.com/package/resjs)
 生成res.js，两个用法一样，生成的代码也是完全一样的。
 
 用法:
