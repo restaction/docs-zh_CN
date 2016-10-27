@@ -2,8 +2,9 @@ site_name: RestAction
 pages:
   - 首页: index.md
   - 起步: quickstart.md
-  - resjs: resjs.md
   - Schema语法: schema.md
+  - resjs: resjs.md
+  - API文档阅读指南: document.md
   - API: api.autodoc
 theme: yeti
 extra_css:
