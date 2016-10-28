@@ -44,7 +44,8 @@ Action
 如果API不是部署在网站根目录下，例如部署在`/api`下， 则再加上这个前缀，变成`/api/user/login`。
 
 !!! note
-    对于`GET,DELETE`请求，请求数据放在URL后面，`POST,PUT,PATCH`请求数据在请求体中。
+    对于`GET,DELETE`请求，请求数据放在URL后面，`POST,PUT,PATCH`请求数据在请求体中，
+    `Content-Type` 为 `application/json`。
 
 
 ## 数据格式

@@ -84,7 +84,7 @@ Action
 $input
 :   输入格式，如果没有$input，则不校验输入，以无参数的形式调用Action。
     实际数据来源取决于HTTP方法，GET和DELETE请求，取自url参数，
-    POST,PUT和PATCH请求，取自请求体，Content-Type为application/json。
+    POST,PUT和PATCH请求，取自请求体，Content-Type为`application/json`。
 
 $output
 :   输出格式，如果没有$output，则不校验输出。

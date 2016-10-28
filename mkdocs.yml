@@ -4,8 +4,9 @@ pages:
   - 起步: quickstart.md
   - Schema语法: schema.md
   - resjs: resjs.md
-  - API文档阅读指南: document.md
+  - 阅读API文档: document.md
   - API: api.autodoc
+  - 语言: language.md
 theme: yeti
 extra_css:
     - css/extra.css
