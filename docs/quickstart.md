@@ -448,7 +448,8 @@ Api提供before_request, after_request, error_handler这3个装饰器用来注�
 
 在API文档页面打开控制台即可使用 res.js。
 
-如果API路径不是网站根路径，则需要配置 **API_URL_PREFIX**。
+如果API路径不是网站根路径，则需要配置 **API_URL_PREFIX**，用于生成API文档中显示的URL
+和res.js调用API的URL，这项配置不会影响API的真实路径。
 
 例如: `http://127.0.0.1:5000/api`
 
